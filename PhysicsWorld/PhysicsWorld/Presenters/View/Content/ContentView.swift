@@ -9,10 +9,9 @@ import SwiftUI
 
 struct ContentView: View {
     var body: some View {
-        VStack {
-            UIKitToSwiftUI(controller: PhysicsScene(text: "opa"))
-        }
-        .padding()
+
+        UIKitToSwiftUI(controller: PhysicsScene(text: "opa")).border(.black)
+    
     }
 }
 

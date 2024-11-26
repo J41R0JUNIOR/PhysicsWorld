@@ -6,10 +6,12 @@
 //
 
 import UIKit
+import SwiftUI
 
 class PhysicsScene: UIViewController {
     var text: String
     let label = UILabel()
+    var objects: [any ObjectsProtocol] = []
     
     init(text: String) {
         self.text = text
@@ -22,32 +24,15 @@ class PhysicsScene: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        view.backgroundColor = .clear
-
-       setupStyle()
-        addViews()
-        addContrains()
         
+        view.backgroundColor = .clear
+        
+        setupViewCode()
     }
 }
 
-extension PhysicsScene: ViewCode {
-    func addViews() {
-        view.addSubview(label)
-    }
-    
-    func addContrains() {
-        
-    }
-    
-    func setupStyle() {
-      
-        label.text = text
-        label.textAlignment = .center
-        label.frame = view.bounds
-       
-    }
-    
-    
+
+
+#Preview {
+    PhysicsScene(text: "Nada")
 }

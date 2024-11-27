@@ -9,6 +9,8 @@ import UIKit
 import SwiftUI
 
 class PhysicsScene: UIViewController {
+    var timer: Timer?
+    
     var text: String
     let label = UILabel()
     var objects: [any ObjectsProtocol] = []
@@ -28,13 +30,29 @@ class PhysicsScene: UIViewController {
         view.backgroundColor = .clear
         
         setupViewCode()
-        
         addcircle()
+        startUpdateLoop()
     }
+    
+   
     
     func addcircle(){
         let circleView = CircleView(radius: 100, position: .init(x: 200, y: 300))
         self.view.addSubview(circleView)
+    }
+    
+    func calculatePhysics(){
+        for n in self.view.subviews{
+            n.layer.position = calculateFall(node: n)
+        }
+    }
+    
+    func calculateFall(node: UIView) -> CGPoint{
+        return .init(x: 0, y: 0)
+    }
+    
+    func update(_ currentTime: TimeInterval){
+        calculatePhysics()
     }
     
 }

@@ -28,7 +28,15 @@ class PhysicsScene: UIViewController {
         view.backgroundColor = .clear
         
         setupViewCode()
+        
+        addcircle()
     }
+    
+    func addcircle(){
+        let circleView = CircleView(radius: 100, position: .init(x: 200, y: 300))
+        self.view.addSubview(circleView)
+    }
+    
 }
 
 

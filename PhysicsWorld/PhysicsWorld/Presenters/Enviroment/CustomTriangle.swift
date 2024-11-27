@@ -9,13 +9,13 @@
 
 import SwiftUI
 
-struct Triangle: ObjectsProtocol, Shape{
-    var position: CGVector
-    var velocity: CGVector
+struct CustomTriangle: ObjectsProtocol, Shape{
+    var position: CGPoint
+    var velocity: CGPoint
     var mass: Double
     var isStatic: Bool
     
-    init(position: CGVector = .zero, velocity: CGVector = .zero, mass: Double = .zero, isStatic: Bool = true) {
+    init(position: CGPoint = .zero, velocity: CGPoint = .zero, mass: Double = .zero, isStatic: Bool = true) {
         self.position = position
         self.velocity = velocity
         self.mass = mass
@@ -35,5 +35,5 @@ struct Triangle: ObjectsProtocol, Shape{
 }
 
 #Preview {
-    Triangle()
+    CustomTriangle()
 }

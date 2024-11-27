@@ -10,12 +10,12 @@ import Foundation
 import SwiftUI
 
 struct CustomRectangle: ObjectsProtocol, Shape{
-    var position: CGVector
-    var velocity: CGVector
+    var position: CGPoint
+    var velocity: CGPoint
     var mass: Double
     var isStatic: Bool
     
-    init(position: CGVector = .zero, velocity: CGVector = .zero, mass: Double = .zero, radius: Double , isStatic: Bool = true) {
+    init(position: CGPoint = .zero, velocity: CGPoint = .zero, mass: Double = .zero, radius: Double , isStatic: Bool = true) {
         self.position = position
         self.velocity = velocity
         self.mass = mass

@@ -24,5 +24,7 @@ extension PhysicsScene: ViewCode {
         label.textAlignment = .center
         label.frame = view.bounds
         label.translatesAutoresizingMaskIntoConstraints = false
+        
+        addcircle()
     }
 }

@@ -13,13 +13,13 @@ struct CustomRectangle: ObjectsProtocol, Shape{
     var position: CGPoint
     var velocity: CGPoint
     var mass: Double
-    var isStatic: Bool
+    var isDynamic: Bool
     
     init(position: CGPoint = .zero, velocity: CGPoint = .zero, mass: Double = .zero, radius: Double , isStatic: Bool = true) {
         self.position = position
         self.velocity = velocity
         self.mass = mass
-        self.isStatic = isStatic
+        self.isDynamic = isStatic
     }
   
     

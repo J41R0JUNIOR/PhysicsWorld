@@ -12,5 +12,5 @@ protocol ObjectsProtocol {
     var position: CGPoint { get set }
     var velocity: CGPoint { get set }
     var mass: Double { get set }
-    var isStatic: Bool { get set }
+    var isDynamic: Bool { get set }
 }

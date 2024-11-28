@@ -16,7 +16,7 @@ class CircleView: UIView, ObjectsProtocol, GetGravityProtocol {
     var isDynamic: Bool
     var radius: CGFloat
     
-    init(radius: CGFloat, position: CGPoint = .zero, velocity: CGPoint = .zero, mass: Double = .zero, isDynamic: Bool = true) {
+    required init(radius: CGFloat, position: CGPoint = .zero, velocity: CGPoint = .zero, mass: Double = .zero, isDynamic: Bool = true) {
         self.radius = radius
         
         self.isDynamic = isDynamic

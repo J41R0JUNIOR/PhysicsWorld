@@ -13,7 +13,7 @@ class PhysicsScene: UIViewController {
     let text: String
     let label = UILabel()
     var objects: [UIView & ObjectsProtocol & GetGravityProtocol] = []
-
+    
     init(text: String = "") {
         self.text = text
         super.init(nibName: nil, bundle: nil)
@@ -27,7 +27,7 @@ class PhysicsScene: UIViewController {
         super.viewDidLoad()
         view.backgroundColor = .clear
         setupViewCode()
-       
+        
         startUpdateLoop()
     }
     
@@ -35,7 +35,15 @@ class PhysicsScene: UIViewController {
         if let touch = touches.first {
             let position = touch.location(in: view)
             
-            self.addObject(type: CircleView.self, position: position, radius: Double.random(in: 5...20), mass: Double.random(in: 5...20))
+            if var touchedObject = objects.first(where: { $0.frame.contains(position) }) {
+         
+                touchedObject.attraction = .init(x: Double.random(in: -10...10), y: Double.random(in: -10...10))
+                
+                return
+            }
+            
+            
+            self.addObject(type: CircleView.self, position: position, radius: Double.random(in: 5...40), mass: Double.random(in: 5...30))
         }
     }
     

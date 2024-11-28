@@ -8,9 +8,8 @@
 import SwiftUI
 
 class CircleView: UIView, ObjectsProtocol, GetGravityProtocol {
- 
+    var attraction: CGPoint = .init(x: 0, y: 9.8)
     var position: CGPoint { get { self.center }  set { self.center = newValue } }
-    
     var velocity: CGPoint
     var mass: Double
     var isDynamic: Bool
@@ -18,7 +17,6 @@ class CircleView: UIView, ObjectsProtocol, GetGravityProtocol {
     
     required init(radius: CGFloat, position: CGPoint = .zero, velocity: CGPoint = .zero, mass: Double = .zero, isDynamic: Bool = true) {
         self.radius = radius
-        
         self.isDynamic = isDynamic
         self.velocity = velocity
         self.mass = mass

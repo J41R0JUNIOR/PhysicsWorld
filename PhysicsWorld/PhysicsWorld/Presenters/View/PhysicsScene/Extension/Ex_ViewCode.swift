@@ -25,6 +25,5 @@ extension PhysicsScene: ViewCode {
         label.frame = view.bounds
         label.translatesAutoresizingMaskIntoConstraints = false
         
-        addObject(type: CircleView.self, position: .init(x: 200, y: 300), radius: 15, mass: 10)
     }
 }

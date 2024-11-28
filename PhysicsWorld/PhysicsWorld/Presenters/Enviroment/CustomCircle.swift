@@ -9,10 +9,8 @@ import SwiftUI
 
 class CircleView: UIView, ObjectsProtocol, GetGravityProtocol {
  
-    var position: CGPoint {
-        get { self.center }
-        set { self.center = newValue }
-    }
+    var position: CGPoint { get { self.center }  set { self.center = newValue } }
+    
     var velocity: CGPoint
     var mass: Double
     var isDynamic: Bool
@@ -46,6 +44,5 @@ class CircleView: UIView, ObjectsProtocol, GetGravityProtocol {
         let result = applyintGravity(for: self, deltaTime: deltatime)
         self.position = result.newPosition
         self.velocity = result.velocity
-      
     }
 }

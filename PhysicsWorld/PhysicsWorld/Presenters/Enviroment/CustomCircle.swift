@@ -22,7 +22,6 @@ class CircleView: UIView, ObjectsProtocol, GetGravityProtocol {
         self.mass = mass
         
         super.init(frame: CGRect(x: position.x - radius, y: position.y - radius, width: radius * 2, height: radius * 2))
-        
         self.position = position
         self.backgroundColor = .clear
     }

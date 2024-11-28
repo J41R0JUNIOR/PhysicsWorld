@@ -30,11 +30,7 @@ extension GetGravityProtocol {
             y: object.center.y + newVelocity.y * CGFloat(deltaTime)
         )
         
-//        if object.layer.position.y > frame.bounds.maxY + object.layer.frame.height {
-//            let initialPosition = CGPoint(x: object.layer.position.x, y: -object.layer.frame.height)
-//            return (velocity: .zero, newPosition: initialPosition)
-//        }
-        
+        //just clear it
         if object.layer.position.y > 850 + object.layer.frame.height {
             let initialPosition = CGPoint(x: object.layer.position.x, y: -object.layer.frame.height)
             return (velocity: .zero, newPosition: initialPosition)

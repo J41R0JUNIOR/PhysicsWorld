@@ -31,6 +31,14 @@ class PhysicsScene: UIViewController {
         startUpdateLoop()
     }
     
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        if let touch = touches.first {
+            let position = touch.location(in: view)
+            
+            self.addObject(type: CircleView.self, position: position, radius: Double.random(in: 5...20), mass: Double.random(in: 5...20))
+        }
+    }
+    
     func update(_ currentTime: TimeInterval){
         for n in objects {
             n.update(deltatime: currentTime)

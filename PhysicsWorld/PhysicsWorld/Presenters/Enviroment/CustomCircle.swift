@@ -40,13 +40,13 @@ class CircleView: UIView, ObjectsProtocol {
     var position: CGPoint
     var velocity: CGPoint
     var mass: Double
-    var isStatic: Bool
+    var isDynamic: Bool
     var radius: CGFloat
     
-    init(radius: CGFloat, position: CGPoint = .zero, velocity: CGPoint = .zero, mass: Double = .zero, isStatic: Bool = true) {
+    init(radius: CGFloat, position: CGPoint = .zero, velocity: CGPoint = .zero, mass: Double = .zero, isDynamic: Bool = true) {
         self.radius = radius
         self.position = position
-        self.isStatic = isStatic
+        self.isDynamic = isDynamic
         self.velocity = velocity
         self.mass = mass
         

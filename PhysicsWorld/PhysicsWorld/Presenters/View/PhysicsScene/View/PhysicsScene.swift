@@ -38,10 +38,12 @@ class PhysicsScene: UIViewController {
         }
     }
     
-    func addcircle() {
-        let circleView = CircleView(radius: 15, position: .init(x: 200, y: 300), mass: 10)
-        self.view.addSubview(circleView)
-        self.objects.append(circleView)
+    func addObject<T: UIView & GetGravityProtocol & ObjectsProtocol>(type: T.Type ,position: CGPoint, radius: CGFloat, mass: CGFloat, isDynamic: Bool = true) {
+        
+        let obj = T(radius: radius, position: position, velocity: .zero, mass: mass, isDynamic: isDynamic)
+        
+        self.view.addSubview(obj)
+        self.objects.append(obj)
     }
 }
 

@@ -10,17 +10,24 @@ import Foundation
 import SwiftUI
 
 struct CustomRectangle: ObjectsProtocol, Shape{
+    
     var position: CGPoint
     var velocity: CGPoint
     var mass: Double
     var isDynamic: Bool
     
-    init(position: CGPoint = .zero, velocity: CGPoint = .zero, mass: Double = .zero, radius: Double , isStatic: Bool = true) {
+    init(radius: CGFloat, position: CGPoint, velocity: CGPoint, mass: Double, isDynamic: Bool) {
         self.position = position
         self.velocity = velocity
         self.mass = mass
-        self.isDynamic = isStatic
+        self.isDynamic = isDynamic
     }
+//    init(position: CGPoint = .zero, velocity: CGPoint = .zero, mass: Double = .zero, radius: Double , isStatic: Bool = true) {
+//        self.position = position
+//        self.velocity = velocity
+//        self.mass = mass
+//        self.isDynamic = isStatic
+//    }
   
     
     func path(in rect: CGRect) -> Path {
@@ -37,5 +44,5 @@ struct CustomRectangle: ObjectsProtocol, Shape{
 }
 
 #Preview {
-    CustomRectangle(radius: 1)
+    CustomRectangle(radius: 14, position: .zero, velocity: .zero, mass: .zero, isDynamic: true)
 }

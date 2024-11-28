@@ -13,4 +13,6 @@ protocol ObjectsProtocol {
     var velocity: CGPoint { get set }
     var mass: Double { get set }
     var isDynamic: Bool { get set }
+    
+    init(radius: CGFloat, position: CGPoint, velocity: CGPoint, mass: Double, isDynamic: Bool) 
 }

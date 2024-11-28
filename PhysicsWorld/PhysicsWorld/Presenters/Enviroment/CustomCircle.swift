@@ -7,37 +7,12 @@
 
 import SwiftUI
 
-//struct CustomCircle: ObjectsProtocol, Shape {
-//    var position: CGVector
-//    var velocity: CGVector
-//    var mass: Double
-//    var radius: Double
-//    var isStatic: Bool
-//    
-//
-//    init(position: CGVector = .zero, velocity: CGVector = .zero, mass: Double = .zero, radius: Double, isStatic: Bool = true) {
-//        self.position = position
-//        self.velocity = velocity
-//        self.mass = mass
-//        self.radius = radius
-//        self.isStatic = isStatic
-//    }
-//    
-//    // Método path para desenhar o círculo
-//    func path(in rect: CGRect) -> Path {
-//        var path = Path()
-//        let center = CGPoint(x: rect.midX, y: rect.midY)
-//        path.addArc(center: center, radius: CGFloat(radius), startAngle: .zero, endAngle: .degrees(360), clockwise: false)  
-//        return path
-//    }
-//}
-//
-//#Preview {
-//    CustomCircle(radius: 170)
-//}
-
-class CircleView: UIView, ObjectsProtocol {
-    var position: CGPoint
+class CircleView: UIView, ObjectsProtocol, GetGravityProtocol {
+ 
+    var position: CGPoint {
+        get { self.center }
+        set { self.center = newValue }
+    }
     var velocity: CGPoint
     var mass: Double
     var isDynamic: Bool
@@ -45,12 +20,14 @@ class CircleView: UIView, ObjectsProtocol {
     
     init(radius: CGFloat, position: CGPoint = .zero, velocity: CGPoint = .zero, mass: Double = .zero, isDynamic: Bool = true) {
         self.radius = radius
-        self.position = position
+        
         self.isDynamic = isDynamic
         self.velocity = velocity
         self.mass = mass
         
         super.init(frame: CGRect(x: position.x - radius, y: position.y - radius, width: radius * 2, height: radius * 2))
+        
+        self.position = position
         self.backgroundColor = .clear
     }
     
@@ -63,5 +40,12 @@ class CircleView: UIView, ObjectsProtocol {
         context.addEllipse(in: rect)
         context.setFillColor(UIColor.blue.cgColor)
         context.fillPath()
+    }
+    
+    func update(deltatime: TimeInterval){
+        let result = applyintGravity(for: self, deltaTime: deltatime)
+        self.position = result.newPosition
+        self.velocity = result.velocity
+      
     }
 }

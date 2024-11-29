@@ -30,27 +30,10 @@ extension GetGravityProtocol {
             y: object.center.y + newVelocity.y * CGFloat(deltaTime)
         )
         
-        //just clear it
-        if object.layer.position.y > 850 + object.layer.frame.height {
-            let initialPosition = CGPoint(x: object.layer.position.x, y: -object.layer.frame.height)
-            return (velocity: .zero, newPosition: initialPosition)
-        }
-        
-        if object.layer.position.y < -100 + object.layer.frame.height {
-            let initialPosition = CGPoint(x: object.layer.position.x, y: 850)
-            return (velocity: .zero, newPosition: initialPosition)
-        }
-        
-        if object.layer.position.x > 400 + object.layer.frame.width {
-            let initialPosition = CGPoint(x:  -object.frame.width, y: object.position.y)
-            return (velocity: .zero, newPosition: initialPosition)
-        }
-        
-        if object.layer.position.x < -object.layer.frame.width {
-            let initialPosition = CGPoint(x: 400 + object.frame.width, y: object.position.y)
-            return (velocity: .zero, newPosition: initialPosition)
-        }
-        
         return (velocity: newVelocity, newPosition: newPosition)
     }
+}
+
+#Preview {
+    PhysicsScene()
 }

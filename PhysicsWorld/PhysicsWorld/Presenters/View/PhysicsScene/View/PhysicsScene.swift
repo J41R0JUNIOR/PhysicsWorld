@@ -11,12 +11,12 @@ import simd
 
 class PhysicsScene: UIViewController {
     var gameTimer: Timer?
-    let text: String
-    let label = UILabel()
-    var objects: [UIView & ObjectsProtocol & GetGravityProtocol] = []
+    var qtdNodes: Int
+    let qtdNodesLabel = UILabel()
+    var objects: [UIView & ObjectsProtocol & GravityProtocol] = []
     
-    init(text: String = "") {
-        self.text = text
+    init() {
+        self.qtdNodes = 0
         super.init(nibName: nil, bundle: nil)
     }
     
@@ -27,6 +27,7 @@ class PhysicsScene: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .clear
+//        self.qtdNodes = 10
         setupViewCode()
         startUpdateLoop()
     }
@@ -37,8 +38,7 @@ class PhysicsScene: UIViewController {
             
             if var touchedObject = objects.first(where: { $0.frame.contains(position) }) {
                 
-                touchedObject.forceApplyedByEnviroment = .init(x: 0, y:01)
-                
+                touchedObject.forceApplyedByEnviroment = .init(x: 0, y:0)
                 touchedObject.direction = .init(x: 0, y:0)
                 
                 return
@@ -52,13 +52,24 @@ class PhysicsScene: UIViewController {
     }
     
     func update(_ currentTime: TimeInterval){
-        for var n: any UIView & ObjectsProtocol & GetGravityProtocol in objects {
-            n.update(deltatime: currentTime)
-            n.findOtherGravityForce(for: objects, in: &n, deltaTime: deltaTime)
+        for var n: any UIView & ObjectsProtocol & GravityProtocol in objects {
+            
+            if CGFloat(n.position.x) > view.bounds.maxX || CGFloat(n.position.x) < view.bounds.minX || CGFloat(n.position.y) > view.bounds.maxY || CGFloat(n.position.y) < view.bounds.minY {
+                
+                n.removeFromSuperview()
+                objects.removeAll(where: { $0 === n })
+                
+            }else{
+                n.update(deltatime: currentTime)
+                n.findOtherGravityForce(for: objects, in: &n, deltaTime: deltaTime)
+            }
         }
+        
+        self.qtdNodes = self.view.subviews.count
+        qtdNodesLabel.text = "qtd nodes: \(qtdNodes)"
     }
     
-    func addObject<T: UIView & GetGravityProtocol & ObjectsProtocol>(type: T.Type ,position: simd_float2, radius: Float, mass: Float, isDynamic: Bool = true) {
+    func addObject<T: UIView & GravityProtocol & ObjectsProtocol>(type: T.Type ,position: simd_float2, radius: Float, mass: Float, isDynamic: Bool = true) {
         
         let obj = T(radius: radius, position: position, direction: .init(x: 0, y: 0), mass: mass, isDynamic: isDynamic, forceApplyedByEnviroment: .init(x: 0, y:0))
         

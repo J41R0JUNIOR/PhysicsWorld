@@ -8,7 +8,7 @@
 import SwiftUI
 import simd
 
-class CircleView: UIView, ObjectsProtocol, GetGravityProtocol {
+class CircleView: UIView, ObjectsProtocol, GravityProtocol {
     var acceleration: simd_float2
     
     var forceApplyedByEnviroment: simd_float2

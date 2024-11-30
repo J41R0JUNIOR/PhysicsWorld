@@ -9,7 +9,7 @@ import SwiftUI
 
 struct ContentView: View {
     var body: some View {
-        UIKitToSwiftUI(controller: PhysicsScene(text: "Bolinha de gorlfe"))
+        UIKitToSwiftUI(controller: PhysicsScene())
     
     }
 }

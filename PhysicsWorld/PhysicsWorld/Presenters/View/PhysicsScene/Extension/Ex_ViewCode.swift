@@ -10,20 +10,23 @@ import UIKit
 extension PhysicsScene: ViewCode {
     func addConstraints() {
         NSLayoutConstraint.activate([
-            label.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            label.centerYAnchor.constraint(equalTo: view.topAnchor),
+            qtdNodesLabel.centerYAnchor.constraint(equalTo: view.bottomAnchor),
+            qtdNodesLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor)
         ])
     }
     
     func addViews() {
-        view.addSubview(label)
+        view.addSubview(qtdNodesLabel)
     }
     
     func setupStyle() {
-        label.text = text
-        label.textAlignment = .center
-        label.frame = view.bounds
-        label.translatesAutoresizingMaskIntoConstraints = false
+        qtdNodesLabel.textAlignment = .center
+        qtdNodesLabel.frame = view.bounds
+        qtdNodesLabel.translatesAutoresizingMaskIntoConstraints = false
         
     }
+}
+
+#Preview {
+    PhysicsScene()
 }

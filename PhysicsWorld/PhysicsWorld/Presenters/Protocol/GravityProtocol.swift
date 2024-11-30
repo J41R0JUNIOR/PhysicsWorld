@@ -9,12 +9,12 @@ import Foundation
 import UIKit
 import simd
 
-protocol GetGravityProtocol {
+protocol GravityProtocol {
     
     func update(deltatime: TimeInterval)
 }
 
-extension GetGravityProtocol {
+extension GravityProtocol {
     
     func applyGravity(for object: UIView & ObjectsProtocol, deltaTime: TimeInterval) -> (direction: simd_float2, newPosition: simd_float2) {
   
@@ -34,7 +34,7 @@ extension GetGravityProtocol {
     }
     
     
-    func findOtherGravityForce(for objects: [UIView & ObjectsProtocol], in object:  inout UIView & ObjectsProtocol & GetGravityProtocol, deltaTime: TimeInterval) {
+    func findOtherGravityForce(for objects: [UIView & ObjectsProtocol], in object:  inout UIView & ObjectsProtocol & GravityProtocol, deltaTime: TimeInterval) {
         let G: Float = 6.674e-11
         
         object.forceApplyedByEnviroment = simd_float2.zero

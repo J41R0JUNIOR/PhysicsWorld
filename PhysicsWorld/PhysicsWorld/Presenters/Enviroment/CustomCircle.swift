@@ -25,7 +25,7 @@ class CircleView: UIView, ObjectsProtocol, GetGravityProtocol {
         self.mass = mass
         self.forceApplyedByEnviroment = forceApplyedByEnviroment
         self.position = position
-        self.acceleration = .init(x: direction.x * mass, y:  direction.y * mass)
+        self.acceleration = forceApplyedByEnviroment / mass
         
         super.init(frame: CGRect(x: CGFloat(radius), y:  CGFloat(radius), width: CGFloat(radius) * 2, height: CGFloat(radius) * 2))
         
@@ -46,11 +46,13 @@ class CircleView: UIView, ObjectsProtocol, GetGravityProtocol {
     }
     
     func update(deltatime: TimeInterval){
-        let result = applyintGravity(for: self, deltaTime: deltatime)
+        let result = applyGravity(for: self, deltaTime: deltatime)
         self.position = result.newPosition
         self.direction = result.direction
         self.center.y = CGFloat(position.y)
         self.center.x = CGFloat(position.x)
+        
+       
     }
 }
 

@@ -27,13 +27,13 @@ extension GetGravityProtocol {
         let deltaTimeGravity = object.mass * Float(deltaTime)
         
         let newDirection = simd_float2(
-            x: object.direction.x + object.forceApplyedByEnviroment.x ,
-            y: object.direction.y + object.forceApplyedByEnviroment.y
+            x: object.direction.x + object.forceApplyedByEnviroment.x * Float(deltaTime),
+            y: object.direction.y + object.forceApplyedByEnviroment.y * Float(deltaTime)
         )
         
         let newPosition = simd_float2(
-            x: Float(object.center.x + CGFloat(newDirection.x * Float(deltaTime))),
-            y: Float(object.center.y + CGFloat(newDirection.y * Float(deltaTime)))
+            x: Float(object.center.x + CGFloat(newDirection.x * deltaTimeGravity)),
+            y: Float(object.center.y + CGFloat(newDirection.y * deltaTimeGravity))
         )
         
         return (direction: newDirection, newPosition: newPosition)

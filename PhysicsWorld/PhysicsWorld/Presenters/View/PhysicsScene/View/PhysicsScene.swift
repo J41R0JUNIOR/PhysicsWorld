@@ -37,12 +37,13 @@ class PhysicsScene: UIViewController {
             
             if var touchedObject = objects.first(where: { $0.frame.contains(position) }) {
                 
-                touchedObject.forceApplyedByEnviroment = .init(x: 0, y: touchedObject.forceApplyedByEnviroment.y * (-1))
-//                touchedObject.direction = .init(x: 0, y: touchedObject.direction.y * (-1) )
+                touchedObject.forceApplyedByEnviroment = .init(x: 0, y:0)
+                
+                touchedObject.direction = .init(x: 0, y:0)
                 
                 return
             }
-            let a = Float.random(in: 5...40)
+            let a = Float.random(in: 10...50)
             self.addObject(type: CircleView.self, position: .init(x: Float(position.x), y: Float(position.y)), radius: a, mass: a)
         }
     }
@@ -50,13 +51,13 @@ class PhysicsScene: UIViewController {
     func update(_ currentTime: TimeInterval){
         for n in objects {
             n.update(deltatime: currentTime)
-            n.findOtherGravityForce(for: objects, in: n, deltaTime: deltaTime)
+//            n.findOtherGravityForce(for: objects, in: n, deltaTime: deltaTime)
         }
     }
     
     func addObject<T: UIView & GetGravityProtocol & ObjectsProtocol>(type: T.Type ,position: simd_float2, radius: Float, mass: Float, isDynamic: Bool = true) {
         
-        let obj = T(radius: radius, position: position, direction: .init(x: 0, y: 0), mass: mass, isDynamic: isDynamic, forceApplyedByEnviroment: .init(x: 0, y: 1))
+        let obj = T(radius: radius, position: position, direction: .init(x: 0, y: 0), mass: mass, isDynamic: isDynamic, forceApplyedByEnviroment: .init(x: 0, y: 10))
         
         self.view.addSubview(obj)
         self.objects.append(obj)

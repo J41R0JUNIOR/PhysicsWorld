@@ -6,23 +6,31 @@
 //
 
 import SwiftUI
+import simd
 
 class CircleView: UIView, ObjectsProtocol, GetGravityProtocol {
-    var attraction: CGPoint = .init(x: 0, y: 9.8)
-    var position: CGPoint { get { self.center }  set { self.center = newValue } }
-    var velocity: CGPoint
-    var mass: Double
-    var isDynamic: Bool
-    var radius: CGFloat
+    var acceleration: simd_float2
     
-    required init(radius: CGFloat, position: CGPoint = .zero, velocity: CGPoint = .zero, mass: Double = .zero, isDynamic: Bool = true) {
+    var forceApplyedByEnviroment: simd_float2
+    var position: simd_float2
+    var direction: simd_float2
+    var mass: Float
+    var isDynamic: Bool
+    var radius: Float
+    
+    required init(radius: Float, position: simd_float2 = .zero, direction: simd_float2 = .zero, mass: Float = .zero, isDynamic: Bool = true, forceApplyedByEnviroment: simd_float2 = .zero) {
         self.radius = radius
         self.isDynamic = isDynamic
-        self.velocity = velocity
+        self.direction = direction
         self.mass = mass
-        
-        super.init(frame: CGRect(x: position.x - radius, y: position.y - radius, width: radius * 2, height: radius * 2))
+        self.forceApplyedByEnviroment = forceApplyedByEnviroment
         self.position = position
+        self.acceleration = .init(x: direction.x * mass, y:  direction.y * mass)
+        
+        super.init(frame: CGRect(x: CGFloat(radius), y:  CGFloat(radius), width: CGFloat(radius) * 2, height: CGFloat(radius) * 2))
+        
+        self.center.y = CGFloat(position.y)
+        self.center.x = CGFloat(position.x)
         self.backgroundColor = .clear
     }
     
@@ -40,6 +48,12 @@ class CircleView: UIView, ObjectsProtocol, GetGravityProtocol {
     func update(deltatime: TimeInterval){
         let result = applyintGravity(for: self, deltaTime: deltatime)
         self.position = result.newPosition
-        self.velocity = result.velocity
+        self.direction = result.direction
+        self.center.y = CGFloat(position.y)
+        self.center.x = CGFloat(position.x)
     }
+}
+
+#Preview {
+    PhysicsScene()
 }

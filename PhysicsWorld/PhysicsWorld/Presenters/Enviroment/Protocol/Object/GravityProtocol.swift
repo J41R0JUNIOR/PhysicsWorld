@@ -10,8 +10,7 @@ import UIKit
 import simd
 
 protocol GravityProtocol {
-    
-    func update(deltatime: TimeInterval)
+//    func update(deltatime: TimeInterval)
 }
 
 extension GravityProtocol {
@@ -34,7 +33,7 @@ extension GravityProtocol {
     }
     
     
-    func findOtherGravityForce(for objects: [UIView & ObjectsProtocol], in object:  inout UIView & ObjectsProtocol & GravityProtocol, deltaTime: TimeInterval) {
+    func findOtherGravityForce(for objects: inout [ObjConformation], in object:  inout ObjConformation, deltaTime: TimeInterval) {
         let G: Float = 6.674e-11
         
         object.forceApplyedByEnviroment = simd_float2.zero
@@ -53,6 +52,16 @@ extension GravityProtocol {
             let direction = simd_float2(x: dx / distance, y: dy / distance)
             
             object.forceApplyedByEnviroment += direction * force
+           
+            
+            let qtdSubpieces = object.mass + otherObject.mass / Float.random(in: 1...10)
+            
+            if distance <= otherObject.radius || distance <= object.radius {
+                object.removeFromSuperview()
+                otherObject.removeFromSuperview()
+                objects.removeAll(where: { $0 === otherObject})
+                objects.removeAll(where: { $0 === object})
+            }
         }
         
     }

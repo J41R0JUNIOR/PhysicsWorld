@@ -10,7 +10,6 @@ import UIKit
 import simd
 
 protocol GravityProtocol {
-//    func update(deltatime: TimeInterval)
 }
 
 extension GravityProtocol {
@@ -43,9 +42,15 @@ extension GravityProtocol {
             
             let dx = Float(otherObject.center.x - object.center.x)
             let dy = Float(otherObject.center.y - object.center.y)
-            let distance = sqrt(dx * dx + dy * dy)
+            var distance = sqrt(dx * dx + dy * dy)
+            
+            if distance <= otherObject.radius || distance <= object.radius {
+                
+                distance = object.radius + otherObject.radius
+            }
             
             guard distance > 0 else { continue }
+            
             
             let force = G * (object.mass * otherObject.mass) / (distance * distance)
             
@@ -54,7 +59,7 @@ extension GravityProtocol {
             object.forceApplyedByEnviroment += direction * force
            
             
-            let qtdSubpieces = object.mass + otherObject.mass / Float.random(in: 1...10)
+            
             
 //            if distance <= otherObject.radius || distance <= object.radius {
 //                object.removeFromSuperview()

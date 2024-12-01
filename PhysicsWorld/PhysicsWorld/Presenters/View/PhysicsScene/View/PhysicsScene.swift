@@ -13,6 +13,7 @@ class PhysicsScene: UIViewController, ViewProtocol {
     var gameTimer: Timer?
     var qtdNodes: Int
     let qtdNodesLabel = UILabel()
+    let resetButton = UIButton()
     var objects: [ObjConformation] = []
     
     init() {
@@ -26,7 +27,7 @@ class PhysicsScene: UIViewController, ViewProtocol {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = .black
+//        view.backgroundColor = .black
         setupViewCode()
         startUpdateLoop()
     }
@@ -43,11 +44,18 @@ class PhysicsScene: UIViewController, ViewProtocol {
 //                return
 //            }
             
-            let mass = Float.random(in: 1_000...50_000)
+            let mass = Float.random(in: 10_000...50_000)
             let radius = mass / 5000
             
             self.addObject(type: CircleView.self, position: .init(x: Float(position.x), y: Float(position.y)), radius: radius, mass: mass, in: self)
 
+        }
+    }
+    
+    @objc func reset(){
+        for n in objects{
+            n.removeFromSuperview()
+            objects.removeAll(where: { $0 === n })
         }
     }
     
@@ -60,5 +68,5 @@ class PhysicsScene: UIViewController, ViewProtocol {
 }
 
 #Preview {
-    PhysicsScene()
+    ContentView()
 }

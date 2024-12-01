@@ -10,6 +10,8 @@ import simd
 
 class CircleView: ObjConformation {
     
+
+    
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
@@ -23,11 +25,20 @@ class CircleView: ObjConformation {
     }
     
     
+//
+//       // Set the fill color based on the theme
+//       if userInterfaceStyle == .dark {
+//           context.setFillColor(UIColor.white.cgColor) // White for dark mode
+//       } else {
+//           context.setFillColor(UIColor.black.cgColor) // Black for light mode
+//       }
     
     override func draw(_ rect: CGRect) {
+        let userInterfaceStyle = traitCollection.userInterfaceStyle
+
         guard let context = UIGraphicsGetCurrentContext() else { return }
         context.addEllipse(in: rect)
-        context.setFillColor(UIColor.white.cgColor)
+        userInterfaceStyle == .dark ? context.setFillColor(UIColor.white.cgColor) : context.setFillColor(UIColor.black.cgColor)
         context.fillPath()
     }
     
@@ -41,5 +52,5 @@ class CircleView: ObjConformation {
 }
 
 #Preview {
-    PhysicsScene()
+    ContentView()
 }

@@ -16,7 +16,7 @@ extension ViewProtocol {
     func addObject<T: ObjConformation>(type: T.Type ,position: simd_float2, radius: Float, mass: Float, isDynamic: Bool = true, in view: UIViewController & ViewProtocol) {
         
         let obj = T(radius: radius, position: position, direction: .init(x: 0, y: 0), mass: mass, isDynamic: isDynamic, forceApplyedByEnviroment: .init(x: 0, y:0))
-        
+        obj.layer.zPosition = 0
         view.view.addSubview(obj)
         view.objects.append(obj)
     }

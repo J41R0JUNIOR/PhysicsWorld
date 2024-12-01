@@ -8,6 +8,7 @@
 import Foundation
 import simd
 import UIKit
+import SwiftUI
 
 class ObjConformation: UIView, ObjectsProtocol, GravityProtocol {
     
@@ -41,4 +42,8 @@ class ObjConformation: UIView, ObjectsProtocol, GravityProtocol {
         self.center.y = CGFloat(position.y)
         self.center.x = CGFloat(position.x)
     }
+}
+
+#Preview {
+    ContentView()
 }

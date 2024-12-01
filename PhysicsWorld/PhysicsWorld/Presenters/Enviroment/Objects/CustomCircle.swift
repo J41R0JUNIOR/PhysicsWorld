@@ -27,7 +27,7 @@ class CircleView: ObjConformation {
     override func draw(_ rect: CGRect) {
         guard let context = UIGraphicsGetCurrentContext() else { return }
         context.addEllipse(in: rect)
-        context.setFillColor(UIColor.blue.cgColor)
+        context.setFillColor(UIColor.white.cgColor)
         context.fillPath()
     }
     

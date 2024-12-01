@@ -56,12 +56,12 @@ extension GravityProtocol {
             
             let qtdSubpieces = object.mass + otherObject.mass / Float.random(in: 1...10)
             
-            if distance <= otherObject.radius || distance <= object.radius {
-                object.removeFromSuperview()
-                otherObject.removeFromSuperview()
-                objects.removeAll(where: { $0 === otherObject})
-                objects.removeAll(where: { $0 === object})
-            }
+//            if distance <= otherObject.radius || distance <= object.radius {
+//                object.removeFromSuperview()
+//                otherObject.removeFromSuperview()
+//                objects.removeAll(where: { $0 === otherObject})
+//                objects.removeAll(where: { $0 === object})
+//            }
         }
         
     }

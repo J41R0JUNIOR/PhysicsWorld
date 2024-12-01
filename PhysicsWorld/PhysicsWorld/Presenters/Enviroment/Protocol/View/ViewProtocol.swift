@@ -30,7 +30,7 @@ extension ViewProtocol {
                 
             }else{
                 n.update(deltatime: deltaTime)
-                n.findOtherGravityForce(for: &objects, in: &n, deltaTime: deltaTime)
+                n.applyEnviromentGravity(for: &objects, in: &n, deltaTime: deltaTime)
             }
         }
     }

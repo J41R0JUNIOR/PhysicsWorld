@@ -21,14 +21,12 @@ extension GravityProtocol {
         
         let newDirection = object.direction + object.forceApplyedByEnviroment * Float(deltaTime)
         
-        
         let newPosition = object.position + newDirection * Float(deltaTimeGravity)
         
         return (direction: newDirection, newPosition: newPosition)
     }
     
-    
-    func findOtherGravityForce(for objects: inout [ObjConformation], in object:  inout ObjConformation, deltaTime: TimeInterval) {
+    func applyEnviromentGravity(for objects: inout [ObjConformation], in object:  inout ObjConformation, deltaTime: TimeInterval) {
         let G: Float = 6.674e-11
         
         object.forceApplyedByEnviroment = simd_float2.zero
@@ -46,16 +44,12 @@ extension GravityProtocol {
             
             guard distance > 0 else { continue }
             
-            
             let force = G * (object.mass * otherObject.mass) / (distance * distance)
             
             let direction = simd_float2(x: dx / distance, y: dy / distance)
             
             object.forceApplyedByEnviroment += direction * force
            
-            
-            
-            
 //            if distance <= otherObject.radius || distance <= object.radius {
 //                object.removeFromSuperview()
 //                otherObject.removeFromSuperview()

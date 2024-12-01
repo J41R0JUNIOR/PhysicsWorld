@@ -10,6 +10,7 @@ import simd
 import UIKit
 
 class ObjConformation: UIView, ObjectsProtocol, GravityProtocol {
+    
     var position: simd_float2
     var direction: simd_float2
     var acceleration: simd_float2

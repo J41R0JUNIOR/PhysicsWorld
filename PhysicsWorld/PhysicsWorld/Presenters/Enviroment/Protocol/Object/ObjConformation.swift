@@ -14,7 +14,6 @@ class ObjConformation: UIView, ObjectsProtocol, GravityProtocol {
     
     var position: simd_float2
     var direction: simd_float2
-    var acceleration: simd_float2
     var forceApplyedByEnviroment: simd_float2
     var mass: Float
     var radius: Float
@@ -22,7 +21,6 @@ class ObjConformation: UIView, ObjectsProtocol, GravityProtocol {
     
     required init(radius: Float, position: simd_float2, direction: simd_float2, mass: Float, isDynamic: Bool, forceApplyedByEnviroment: simd_float2) {
         self.forceApplyedByEnviroment = forceApplyedByEnviroment
-        self.acceleration = .zero
         self.direction = direction
         self.isDynamic = isDynamic
         self.mass = mass

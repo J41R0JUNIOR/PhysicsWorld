@@ -49,13 +49,6 @@ extension GravityProtocol {
             let direction = simd_float2(x: dx / distance, y: dy / distance)
             
             object.forceApplyedByEnviroment += direction * force
-           
-//            if distance <= otherObject.radius || distance <= object.radius {
-//                object.removeFromSuperview()
-//                otherObject.removeFromSuperview()
-//                objects.removeAll(where: { $0 === otherObject})
-//                objects.removeAll(where: { $0 === object})
-//            }
         }
         
     }

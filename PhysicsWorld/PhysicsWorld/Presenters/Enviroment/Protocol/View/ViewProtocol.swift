@@ -25,13 +25,16 @@ extension ViewProtocol {
         for var n: ObjConformation in objects {
             
             if isObjectInView(n) {
+                
                 n.removeFromSuperview()
                 objects.removeAll(where: { $0 === n })
                 
-            }else{
-                n.update(deltatime: deltaTime)
-                n.applyEnviromentGravity(for: &objects, in: &n, deltaTime: deltaTime)
+                return
             }
+            
+            n.update(deltatime: deltaTime)
+            n.applyEnviromentGravity(for: &objects, in: &n, deltaTime: deltaTime)
+            
         }
     }
     

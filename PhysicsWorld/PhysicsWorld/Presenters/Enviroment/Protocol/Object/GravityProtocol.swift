@@ -8,6 +8,7 @@
 import Foundation
 import UIKit
 import simd
+import SwiftUI
 
 protocol GravityProtocol {
 }
@@ -45,7 +46,6 @@ extension GravityProtocol {
             var distance = sqrt(dx * dx + dy * dy)
             
             if distance <= otherObject.radius || distance <= object.radius {
-                
                 distance = object.radius + otherObject.radius
             }
             
@@ -73,5 +73,5 @@ extension GravityProtocol {
 }
 
 #Preview {
-    PhysicsScene()
+    ContentView()
 }

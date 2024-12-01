@@ -1,0 +1,64 @@
+//
+//  PhysicsScene.swift
+//  PhysicsWorld
+//
+//  Created by Jairo Júnior on 26/11/24.
+//
+
+import UIKit
+import SwiftUI
+import simd
+
+class PhysicsScene: UIViewController, ViewProtocol {
+    var gameTimer: Timer?
+    var qtdNodes: Int
+    let qtdNodesLabel = UILabel()
+    var objects: [ObjConformation] = []
+    
+    init() {
+        self.qtdNodes = 0
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        view.backgroundColor = .black
+        setupViewCode()
+        startUpdateLoop()
+    }
+    
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        if let touch = touches.first {
+            let position = touch.location(in: view)
+            
+//            if let touchedObject = objects.first(where: { $0.frame.contains(position) }) {
+//                
+//                touchedObject.forceApplyedByEnviroment = .init(x: 0, y:0)
+//                touchedObject.direction = .init(x: 0, y:0)
+//                
+//                return
+//            }
+            
+            let mass = Float.random(in: 1_000...50_000)
+            let radius = mass / 5000
+            
+            self.addObject(type: CircleView.self, position: .init(x: Float(position.x), y: Float(position.y)), radius: radius, mass: mass, in: self)
+
+        }
+    }
+    
+    func update(_ currentTime: TimeInterval){
+        updateObjects(currentTime)
+        
+        self.qtdNodes = self.view.subviews.count
+        qtdNodesLabel.text = "qtd nodes: \(qtdNodes)"
+    }
+}
+
+#Preview {
+    PhysicsScene()
+}

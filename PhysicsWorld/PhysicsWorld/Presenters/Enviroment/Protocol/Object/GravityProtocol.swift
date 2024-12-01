@@ -15,19 +15,14 @@ protocol GravityProtocol {
 
 extension GravityProtocol {
     
-    func applyGravity(for object: UIView & ObjectsProtocol, deltaTime: TimeInterval) -> (direction: simd_float2, newPosition: simd_float2) {
+    func applyGravity(for object: ObjConformation, deltaTime: TimeInterval) -> (direction: simd_float2, newPosition: simd_float2) {
   
         let deltaTimeGravity = object.mass * Float(deltaTime)
         
-        let newDirection = simd_float2(
-            x: object.direction.x + object.forceApplyedByEnviroment.x * Float(deltaTime),
-            y: object.direction.y + object.forceApplyedByEnviroment.y * Float(deltaTime)
-        )
+        let newDirection = object.direction + object.forceApplyedByEnviroment * Float(deltaTime)
         
-        let newPosition = simd_float2(
-            x: Float(object.center.x + CGFloat(newDirection.x * deltaTimeGravity)),
-            y: Float(object.center.y + CGFloat(newDirection.y * deltaTimeGravity))
-        )
+        
+        let newPosition = object.position + newDirection * Float(deltaTimeGravity)
         
         return (direction: newDirection, newPosition: newPosition)
     }

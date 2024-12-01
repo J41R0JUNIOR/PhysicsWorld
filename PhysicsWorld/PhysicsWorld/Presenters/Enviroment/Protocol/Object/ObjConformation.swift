@@ -10,7 +10,6 @@ import simd
 import UIKit
 import SwiftUI
 
-
 class ObjConformation: UIView, ObjectsProtocol, GravityProtocol {
     
     var position: simd_float2

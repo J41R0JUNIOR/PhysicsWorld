@@ -12,7 +12,7 @@ import SwiftUI
 class HUDPhysicsScene: UIViewController, Updateable {
     var timerToUpdate: Timer?
     
-    var deltaTime: TimeInterval = 1/2
+    var deltaTime: TimeInterval = 1/60
     
     let physicsScene = PhysicsScene()
     
@@ -20,6 +20,7 @@ class HUDPhysicsScene: UIViewController, Updateable {
     let qtdNodesLabel: UILabel = .init()
     let resetButton = UIButton()
     var editModeToggle: UIButton = .init()
+    var pathCreationToggle: UIButton = .init()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -37,7 +38,12 @@ class HUDPhysicsScene: UIViewController, Updateable {
     }
     
     @objc func editMode() {
-        physicsScene.editMode.toggle()
+        physicsScene.isEditingMode.toggle()
+    }
+    
+    @objc func createPath() {
+        physicsScene.isCreatingPaht.toggle()
+        physicsScene.view.layer.sublayers?.removeAll(where: { $0 is CAShapeLayer })
     }
     
     func update(_ deltaTime: TimeInterval) {
@@ -45,7 +51,9 @@ class HUDPhysicsScene: UIViewController, Updateable {
         self.qtdNodes = physicsScene.view.subviews.count
         qtdNodesLabel.text = "qtd nodes: \(qtdNodes)"
         
-        self.editModeToggle.setTitle(physicsScene.editMode ? "Edit Mode" : "Disable Edit", for: .normal)
+        self.editModeToggle.setTitle(physicsScene.isEditingMode ? "Disable Edit" : "Edit Mode", for: .normal)
+        
+        self.pathCreationToggle.setTitle(physicsScene.isCreatingPaht ? "Disable Path" : "Show Path", for: .normal)
     }
 }
 

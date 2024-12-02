@@ -14,7 +14,8 @@ class PhysicsScene: UIViewController, ViewProtocol, Updateable {
     var timerToUpdate: Timer?
     
     var objects: [ObjConformation] = []
-    var editMode: Bool = false
+    var isEditingMode: Bool = false
+    var isCreatingPaht: Bool = false
     
     init() {
         super.init(nibName: nil, bundle: nil)
@@ -30,7 +31,7 @@ class PhysicsScene: UIViewController, ViewProtocol, Updateable {
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        guard !editMode else { return }
+        guard isEditingMode else { return }
         
         if let touch = touches.first {
             let position = touch.location(in: view)
@@ -48,7 +49,7 @@ class PhysicsScene: UIViewController, ViewProtocol, Updateable {
   
     
     func update(_ currentTime: TimeInterval){
-        updateObjects(currentTime)
+        updateObjects(currentTime, isCreatingPaht: isCreatingPaht)
     }
 }
 

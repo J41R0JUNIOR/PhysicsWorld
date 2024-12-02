@@ -24,22 +24,24 @@ extension ViewProtocol {
     func updateObjects(_ deltaTime: TimeInterval){
         for var n: ObjConformation in objects {
             
-            if isObjectInView(n) {
-                
-                n.removeFromSuperview()
-                objects.removeAll(where: { $0 === n })
-                
-                return
-            }
+//            if isObjectInView(n) {
+//                
+//                n.removeFromSuperview()
+//                objects.removeAll(where: { $0 === n })
+//                
+//                return
+//            }
             
             n.update(deltatime: deltaTime)
             n.applyEnviromentGravity(for: &objects, in: &n, deltaTime: deltaTime)
         }
     }
     
-    func isObjectInView(_ object: ObjConformation) -> Bool {
-        return CGFloat(object.position.x) > view.bounds.maxX + view.layer.position.x || CGFloat(object.position.x) < view.bounds.minX - view.layer.position.x || CGFloat(object.position.y) > view.bounds.maxY || CGFloat(object.position.y) < view.bounds.minY ? true : false
-    }
+  
+    
+//    func isObjectInView(_ object: ObjConformation) -> Bool {
+//        return CGFloat(object.position.x) > view.bounds.maxX + view.layer.position.x || CGFloat(object.position.x) < view.bounds.minX - view.layer.position.x || CGFloat(object.position.y) > view.bounds.maxY || CGFloat(object.position.y) < view.bounds.minY ? true : false
+//    }
     
     func controlCamera(_ deltaTime: TimeInterval, touches: Set<UITouch>){
         guard let touch = touches.first else { return }

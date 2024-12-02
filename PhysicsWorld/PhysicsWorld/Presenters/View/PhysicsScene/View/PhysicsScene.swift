@@ -9,15 +9,15 @@ import UIKit
 import SwiftUI
 import simd
 
-class PhysicsScene: UIViewController, ViewProtocol {
+class PhysicsScene: UIViewController, ViewProtocol, Updateable {
+    var deltaTime: TimeInterval = 1/60
     var gameTimer: Timer?
-    var qtdNodes: Int
-    let qtdNodesLabel = UILabel()
-    let resetButton = UIButton()
+    
     var objects: [ObjConformation] = []
+    var editMode: Bool = false
+    var editModeToggle: UIButton = .init()
     
     init() {
-        self.qtdNodes = 0
         super.init(nibName: nil, bundle: nil)
     }
     
@@ -27,8 +27,8 @@ class PhysicsScene: UIViewController, ViewProtocol {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        setupViewCode()
-        startUpdateLoop()
+        
+        startUpdateLoop(deltaTime: deltaTime)
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
@@ -46,19 +46,10 @@ class PhysicsScene: UIViewController, ViewProtocol {
         self.controlCamera(deltaTime, touches: touches)
     }
     
-    @objc func reset(){
-        for n in objects{
-            n.removeFromSuperview()
-            objects.removeAll(where: { $0 === n })
-        }
-    }
+  
     
     func update(_ currentTime: TimeInterval){
         updateObjects(currentTime)
-        
-        self.qtdNodes = self.view.subviews.count
-        qtdNodesLabel.text = "qtd nodes: \(qtdNodes)"
-        
     }
 }
 

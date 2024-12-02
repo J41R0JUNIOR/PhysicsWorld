@@ -11,11 +11,10 @@ import simd
 
 class PhysicsScene: UIViewController, ViewProtocol, Updateable {
     var deltaTime: TimeInterval = 1/60
-    var gameTimer: Timer?
+    var timerToUpdate: Timer?
     
     var objects: [ObjConformation] = []
     var editMode: Bool = false
-    var editModeToggle: UIButton = .init()
     
     init() {
         super.init(nibName: nil, bundle: nil)
@@ -31,9 +30,10 @@ class PhysicsScene: UIViewController, ViewProtocol, Updateable {
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        guard !editMode else { return }
+        
         if let touch = touches.first {
             let position = touch.location(in: view)
-            
             let mass = Float.random(in: 10_000...50_000)
             let radius = mass / 5000
             

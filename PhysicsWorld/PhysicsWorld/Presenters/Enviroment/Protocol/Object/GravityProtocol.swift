@@ -56,5 +56,3 @@ extension GravityProtocol {
 #Preview {
     ContentView()
 }
-
-

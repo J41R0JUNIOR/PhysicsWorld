@@ -8,7 +8,7 @@
 import UIKit
 
 protocol Updateable: UIViewController {
-    var gameTimer: Timer? { get set }
+    var timerToUpdate: Timer? { get set }
     var deltaTime: TimeInterval { get set }
     
     func update(_ deltaTime: TimeInterval)
@@ -16,12 +16,12 @@ protocol Updateable: UIViewController {
 
 extension Updateable {
     func startUpdateLoop(deltaTime: TimeInterval) {
-        gameTimer = Timer.scheduledTimer(withTimeInterval: deltaTime, repeats: true) { [ weak self ] time in
+        timerToUpdate = Timer.scheduledTimer(withTimeInterval: deltaTime, repeats: true) { [ weak self ] time in
             self?.update(time.timeInterval)
         }
     }
     
     func stopUpdateLoop() {
-        gameTimer?.invalidate()
+        timerToUpdate?.invalidate()
     }
 }

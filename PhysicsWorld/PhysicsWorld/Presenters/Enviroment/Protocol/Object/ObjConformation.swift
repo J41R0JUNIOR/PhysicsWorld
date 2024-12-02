@@ -20,8 +20,9 @@ class ObjConformation: UIView, ObjectsProtocol, GravityProtocol, PathProtocol {
     var isDynamic: Bool
     
     var path: UIBezierPath = .init()
+   
     
-    required init(radius: Float, position: simd_float2, direction: simd_float2, mass: Float, isDynamic: Bool, forceApplyedByEnviroment: simd_float2) {
+    required init(radius: Float, position: simd_float2, direction: simd_float2 = .init(), mass: Float, isDynamic: Bool, forceApplyedByEnviroment: simd_float2 = .init()) {
         self.forceApplyedByEnviroment = forceApplyedByEnviroment
         self.direction = direction
         self.isDynamic = isDynamic
@@ -41,7 +42,9 @@ class ObjConformation: UIView, ObjectsProtocol, GravityProtocol, PathProtocol {
         self.direction = result.direction
         self.center = position.transformToCGPoint()
         
-        createPath(for: self)
+       
+//        createPath(for: self)
+        
     }
 }
 

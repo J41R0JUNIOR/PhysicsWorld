@@ -9,9 +9,6 @@ import SwiftUI
 import simd
 
 class CircleView: ObjConformation {
-    
-
-    
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
@@ -24,15 +21,6 @@ class CircleView: ObjConformation {
         self.backgroundColor = .clear
     }
     
-    
-//
-//       // Set the fill color based on the theme
-//       if userInterfaceStyle == .dark {
-//           context.setFillColor(UIColor.white.cgColor) // White for dark mode
-//       } else {
-//           context.setFillColor(UIColor.black.cgColor) // Black for light mode
-//       }
-    
     override func draw(_ rect: CGRect) {
         let userInterfaceStyle = traitCollection.userInterfaceStyle
 
@@ -41,14 +29,6 @@ class CircleView: ObjConformation {
         userInterfaceStyle == .dark ? context.setFillColor(UIColor.white.cgColor) : context.setFillColor(UIColor.black.cgColor)
         context.fillPath()
     }
-    
-//    override func update(deltatime: TimeInterval){
-//        let result = applyGravity(for: self, deltaTime: deltatime)
-//        self.position = result.newPosition
-//        self.direction = result.direction
-//        self.center.y = CGFloat(position.y)
-//        self.center.x = CGFloat(position.x)
-//    }
 }
 
 #Preview {

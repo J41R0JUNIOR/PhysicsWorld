@@ -26,8 +26,7 @@ class PhysicsScene: UIViewController, ViewProtocol, Updateable {
     }
     
     override func viewDidLoad() {
-        super.viewDidLoad()
-        
+        super.viewDidLoad()        
         startUpdateLoop(deltaTime: deltaTime)
     }
     

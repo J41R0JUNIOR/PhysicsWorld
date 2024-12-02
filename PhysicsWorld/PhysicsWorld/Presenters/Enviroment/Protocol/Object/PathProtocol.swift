@@ -45,34 +45,6 @@ extension PathProtocol {
         }
         self.superview?.layer.addSublayer(shapeLayer)
     }
-    
-    //    func createPath(deltaTime: TimeInterval) {
-    //        if let node = self.superview?.layer.sublayers?.first(where: { $0.name == "\(id)" }){
-    //            node.removeFromSuperlayer()
-    //        }
-    //
-    //        let steps = 3
-    //
-    //
-    //        for n in 1...steps {
-    //            let point = position
-    //
-    //            if n == 0{
-    //                path.move(to: position.transformToCGPoint())
-    //            }
-    //
-    //            path.addLine(to: point.transformToCGPoint())
-    //        }
-    //
-    //        let shapeLayer = CAShapeLayer()
-    //        shapeLayer.path = path.cgPath
-    //        shapeLayer.strokeColor = UIColor.red.cgColor
-    //        shapeLayer.lineWidth = 2.0
-    //        shapeLayer.fillColor = nil
-    //        shapeLayer.name = "\(id)"
-    //
-    //        self.superview?.layer.addSublayer(shapeLayer)
-    //    }
 }
 
 

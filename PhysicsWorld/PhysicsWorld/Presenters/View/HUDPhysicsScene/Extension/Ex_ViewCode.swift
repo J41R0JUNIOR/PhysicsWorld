@@ -13,11 +13,11 @@ extension HUDPhysicsScene: ViewCode {
             qtdNodesLabel.centerYAnchor.constraint(equalTo: view.bottomAnchor),
             qtdNodesLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             
-            resetButton.centerYAnchor.constraint(equalTo: view.topAnchor, constant: 10),
-            resetButton.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            editModeToggle.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            editModeToggle.centerYAnchor.constraint(equalTo: view.topAnchor, constant: 10),
             
-            editModeToggle.leadingAnchor.constraint(equalTo: resetButton.trailingAnchor, constant: 10),
-            editModeToggle.centerYAnchor.constraint(equalTo: resetButton.centerYAnchor)
+            resetButton.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            resetButton.topAnchor.constraint(equalTo: editModeToggle.bottomAnchor, constant: 10)
         ])
     }
     
@@ -27,8 +27,6 @@ extension HUDPhysicsScene: ViewCode {
         view.addSubview(editModeToggle)
         view.addSubview(physicsScene.view)
         
-//        view.addSubview(resetButton)
-//        view.addSubview(editModeToggle)
         view.bringSubviewToFront(resetButton)
         view.bringSubviewToFront(editModeToggle)
     }

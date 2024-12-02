@@ -41,8 +41,11 @@ class HUDPhysicsScene: UIViewController, Updateable {
     }
     
     func update(_ deltaTime: TimeInterval) {
+        
         self.qtdNodes = physicsScene.view.subviews.count
         qtdNodesLabel.text = "qtd nodes: \(qtdNodes)"
+        
+        self.editModeToggle.setTitle(physicsScene.editMode ? "Edit Mode" : "Disable Edit", for: .normal)
     }
 }
 

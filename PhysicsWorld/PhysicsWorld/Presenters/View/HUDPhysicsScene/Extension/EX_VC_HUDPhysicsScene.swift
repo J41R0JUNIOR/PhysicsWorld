@@ -17,7 +17,10 @@ extension HUDPhysicsScene: ViewCode {
             editModeToggle.centerYAnchor.constraint(equalTo: view.topAnchor, constant: 10),
             
             resetButton.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-            resetButton.topAnchor.constraint(equalTo: editModeToggle.bottomAnchor, constant: 10)
+            resetButton.topAnchor.constraint(equalTo: editModeToggle.bottomAnchor, constant: 10),
+            
+            pathCreationToggle.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            pathCreationToggle.topAnchor.constraint(equalTo: resetButton.bottomAnchor, constant: 10)
         ])
     }
     
@@ -26,7 +29,9 @@ extension HUDPhysicsScene: ViewCode {
         view.addSubview(resetButton)
         view.addSubview(editModeToggle)
         view.addSubview(physicsScene.view)
+        view.addSubview(pathCreationToggle)
         
+        view.bringSubviewToFront(pathCreationToggle)
         view.bringSubviewToFront(resetButton)
         view.bringSubviewToFront(editModeToggle)
     }
@@ -60,6 +65,14 @@ extension HUDPhysicsScene: ViewCode {
         editModeToggle.layer.zPosition = 1
         editModeToggle.addTarget(self, action: #selector(editMode), for: .touchUpInside)
         editModeToggle.translatesAutoresizingMaskIntoConstraints = false
+        
+        pathCreationToggle.setTitle("Path", for: .normal)
+        pathCreationToggle.setTitleColor(.systemBackground, for: .normal)
+        pathCreationToggle.backgroundColor = .label
+        pathCreationToggle.layer.cornerRadius = 10
+        pathCreationToggle.layer.zPosition = 1
+        pathCreationToggle.addTarget(self, action: #selector(createPath), for: .touchUpInside)
+        pathCreationToggle.translatesAutoresizingMaskIntoConstraints = false
     }
 }
 

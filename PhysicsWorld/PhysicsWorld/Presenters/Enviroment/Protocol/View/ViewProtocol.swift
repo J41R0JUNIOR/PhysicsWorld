@@ -21,7 +21,7 @@ extension ViewProtocol {
         view.objects.append(obj)
     }
     
-    func updateObjects(_ deltaTime: TimeInterval){
+    func updateObjects(_ deltaTime: TimeInterval, isCreatingPaht: Bool){
         for var n: ObjConformation in objects {
             
 //            if isObjectInView(n) {
@@ -34,6 +34,10 @@ extension ViewProtocol {
             
             n.update(deltatime: deltaTime)
             n.applyEnviromentGravity(for: &objects, in: &n, deltaTime: deltaTime)
+            
+            if isCreatingPaht {
+                n.createPath(for: n)
+            }
         }
     }
     

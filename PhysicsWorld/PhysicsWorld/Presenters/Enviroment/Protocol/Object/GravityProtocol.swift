@@ -50,10 +50,11 @@ extension GravityProtocol {
             
             object.forceApplyedByEnviroment += direction * force
         }
-        
     }
 }
 
 #Preview {
     ContentView()
 }
+
+

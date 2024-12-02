@@ -10,14 +10,16 @@ import simd
 import UIKit
 import SwiftUI
 
-class ObjConformation: UIView, ObjectsProtocol, GravityProtocol {
-    
+class ObjConformation: UIView, ObjectsProtocol, GravityProtocol, PathProtocol {
+    let id: UUID = .init()
     var position: simd_float2
     var direction: simd_float2
     var forceApplyedByEnviroment: simd_float2
     var mass: Float
     var radius: Float
     var isDynamic: Bool
+    
+    var path: UIBezierPath = .init()
     
     required init(radius: Float, position: simd_float2, direction: simd_float2, mass: Float, isDynamic: Bool, forceApplyedByEnviroment: simd_float2) {
         self.forceApplyedByEnviroment = forceApplyedByEnviroment
@@ -33,12 +35,13 @@ class ObjConformation: UIView, ObjectsProtocol, GravityProtocol {
         fatalError("init(coder:) has not been implemented")
     }
     
-     func update(deltatime: TimeInterval){
+    func update(deltatime: TimeInterval){
         let result = applyGravity(for: self, deltaTime: deltatime)
         self.position = result.newPosition
         self.direction = result.direction
-        self.center.y = CGFloat(position.y)
-        self.center.x = CGFloat(position.x)
+        self.center = position.transformToCGPoint()
+        
+        createPath(for: self)
     }
 }
 

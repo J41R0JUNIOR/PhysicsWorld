@@ -34,11 +34,27 @@ extension ViewProtocol {
             
             n.update(deltatime: deltaTime)
             n.applyEnviromentGravity(for: &objects, in: &n, deltaTime: deltaTime)
-            
         }
     }
     
     func isObjectInView(_ object: ObjConformation) -> Bool {
         return CGFloat(object.position.x) > view.bounds.maxX + view.layer.position.x || CGFloat(object.position.x) < view.bounds.minX - view.layer.position.x || CGFloat(object.position.y) > view.bounds.maxY || CGFloat(object.position.y) < view.bounds.minY ? true : false
+    }
+    
+    func controlCamera(_ deltaTime: TimeInterval, touches: Set<UITouch>){
+        guard let touch = touches.first else { return }
+        let position = touch.location(in: view)
+        let previusLocation = touch.previousLocation(in: view)
+        
+        let dx = Float(position.x - previusLocation.x)
+        let dy = Float(position.y - previusLocation.y)
+        
+        var direction = simd_float2(x: dx , y: dy )
+        direction *= 0.5
+        
+        let newDirection = direction.transformToCGPoint()
+        
+        view.layer.position.x += newDirection.x
+        view.layer.position.y += newDirection.y
     }
 }

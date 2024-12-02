@@ -34,9 +34,9 @@ extension GravityProtocol {
         for otherObject in objects {
             guard otherObject !== object else { continue }
             
-            let dx = Float(otherObject.center.x - object.center.x)
-            let dy = Float(otherObject.center.y - object.center.y)
-            var distance = sqrt(dx * dx + dy * dy)
+            let d: simd_float2 = otherObject.position - object.position
+            
+            var distance = sqrt(pow(d.x, 2) + pow(d.y, 2))
             
             if distance <= otherObject.radius || distance <= object.radius {
                 distance = object.radius + otherObject.radius
@@ -46,7 +46,7 @@ extension GravityProtocol {
             
             let force = G * (object.mass * otherObject.mass) / (distance * distance)
             
-            let direction = simd_float2(x: dx / distance, y: dy / distance)
+            let direction = d/distance
             
             object.forceApplyedByEnviroment += direction * force
         }

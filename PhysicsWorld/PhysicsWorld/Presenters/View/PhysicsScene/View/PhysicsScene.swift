@@ -27,7 +27,6 @@ class PhysicsScene: UIViewController, ViewProtocol {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-//        view.backgroundColor = .black
         setupViewCode()
         startUpdateLoop()
     }
@@ -36,20 +35,15 @@ class PhysicsScene: UIViewController, ViewProtocol {
         if let touch = touches.first {
             let position = touch.location(in: view)
             
-//            if let touchedObject = objects.first(where: { $0.frame.contains(position) }) {
-//                
-//                touchedObject.forceApplyedByEnviroment = .init(x: 0, y:0)
-//                touchedObject.direction = .init(x: 0, y:0)
-//                
-//                return
-//            }
-            
             let mass = Float.random(in: 10_000...50_000)
             let radius = mass / 5000
             
             self.addObject(type: CircleView.self, position: .init(x: Float(position.x), y: Float(position.y)), radius: radius, mass: mass, in: self)
-
         }
+    }
+    
+    override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
+        self.controlCamera(deltaTime, touches: touches)
     }
     
     @objc func reset(){
@@ -64,6 +58,7 @@ class PhysicsScene: UIViewController, ViewProtocol {
         
         self.qtdNodes = self.view.subviews.count
         qtdNodesLabel.text = "qtd nodes: \(qtdNodes)"
+        
     }
 }
 

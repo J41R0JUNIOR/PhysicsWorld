@@ -45,6 +45,10 @@ extension HUDPhysicsScene: ViewCode {
         physicsScene.view.backgroundColor = .clear
         physicsScene.didMove(toParent: self)
         
+        physicsScene.view.layer.borderWidth = 10
+        physicsScene.view.layer.borderColor = UIColor.blue.cgColor
+        physicsScene.view.layer.bounds.size = .init(width: 4000, height: 4000)
+        
         
     }
 }

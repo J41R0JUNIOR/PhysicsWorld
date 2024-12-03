@@ -16,8 +16,8 @@ class CircleView: ObjConformation {
     required init(radius: Float, position: simd_float2, direction: simd_float2, mass: Float, isDynamic: Bool, forceApplyedByEnviroment: simd_float2) {
         super.init(radius: radius, position: position, direction: direction, mass: mass, isDynamic: isDynamic, forceApplyedByEnviroment: forceApplyedByEnviroment)
         
-        self.center.y = CGFloat(position.y)
-        self.center.x = CGFloat(position.x)
+        self.center = position.transformToCGPoint()
+
         self.backgroundColor = .clear
     }
     

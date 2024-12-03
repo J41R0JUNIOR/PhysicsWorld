@@ -18,9 +18,22 @@ class HUDPhysicsScene: UIViewController, Updateable {
     
     var qtdNodes: Int = 0
     let qtdNodesLabel: UILabel = .init()
-    let resetButton = UIButton()
-    var editModeToggle: UIButton = .init()
-    var pathCreationToggle: UIButton = .init()
+    
+    var resetButton = CustomButton(text: "Reset", target: HUDPhysicsScene.self, action: #selector (reset), event: .touchUpInside)
+    
+    var editModeToggle = CustomButton(text: "Edit", target: HUDPhysicsScene.self, action: #selector (editMode), event: .touchDown)
+    
+    var pathCreationToggle = CustomButton(text: "Show Path", target: HUDPhysicsScene.self, action: #selector (createPath), event: .touchDown)
+    
+    var moveUpButton = CustomButton(text: "Up", target: HUDPhysicsScene.self, action: #selector (up), event: .touchDown)
+    
+    var moveDownButton =  CustomButton(text: "Down", target: HUDPhysicsScene.self, action: #selector (down), event: .touchDown)
+    
+    var moveLeftButton: UIButton = .init()
+    
+    var moveRightButton: UIButton = .init()
+    
+    var followShipButton = CustomButton(text: "Follow Ship", target: HUDPhysicsScene.self, action: #selector (down), event: .touchDown)
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -46,14 +59,29 @@ class HUDPhysicsScene: UIViewController, Updateable {
         physicsScene.view.layer.sublayers?.removeAll(where: { $0 is CAShapeLayer })
     }
     
+    @objc func up() {
+        physicsScene.spaceShip.forceApplyedByEnviroment = .init(0, -0.01)
+    }
+    
+    @objc func down() {
+        physicsScene.spaceShip.forceApplyedByEnviroment = .init(0, 0.01)
+    }
+    
+    @objc func resetUpAndDown(){
+        physicsScene.spaceShip.forceApplyedByEnviroment = .zero
+    }
+    
     func update(_ deltaTime: TimeInterval) {
         
         self.qtdNodes = physicsScene.view.subviews.count
         qtdNodesLabel.text = "qtd nodes: \(qtdNodes)"
         
-        self.editModeToggle.setTitle(physicsScene.isEditingMode ? "Disable Edit" : "Edit Mode", for: .normal)
+
+        self.editModeToggle.text = physicsScene.isEditingMode ? "Disable Edit" : "Edit"
         
-        self.pathCreationToggle.setTitle(physicsScene.isCreatingPaht ? "Disable Path" : "Show Path", for: .normal)
+        self.pathCreationToggle.text = !physicsScene.isCreatingPaht ? "Disable Path" : "Show Path"
+        
+      
     }
 }
 

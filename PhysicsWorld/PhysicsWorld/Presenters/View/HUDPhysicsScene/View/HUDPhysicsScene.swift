@@ -33,7 +33,7 @@ class HUDPhysicsScene: UIViewController, Updateable {
     
     var moveRightButton: UIButton = .init()
     
-    var followShipButton = CustomButton(text: "Follow Ship", target: HUDPhysicsScene.self, action: #selector (down), event: .touchDown)
+    var followShipButton = CustomButton(text: "Disable Follow", target: HUDPhysicsScene.self, action: #selector (followShipToggle), event: .touchDown)
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -71,6 +71,10 @@ class HUDPhysicsScene: UIViewController, Updateable {
         physicsScene.spaceShip.forceApplyedByEnviroment = .zero
     }
     
+    @objc func followShipToggle(){
+        physicsScene.followShip.toggle()
+    }
+    
     func update(_ deltaTime: TimeInterval) {
         
         self.qtdNodes = physicsScene.view.subviews.count
@@ -80,6 +84,8 @@ class HUDPhysicsScene: UIViewController, Updateable {
         self.editModeToggle.text = physicsScene.isEditingMode ? "Disable Edit" : "Edit"
         
         self.pathCreationToggle.text = !physicsScene.isCreatingPaht ? "Disable Path" : "Show Path"
+        
+        self.followShipButton.text = !physicsScene.followShip ? "Disable Follow" : "Follow Ship"
         
       
     }

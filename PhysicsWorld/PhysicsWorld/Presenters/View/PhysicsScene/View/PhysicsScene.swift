@@ -17,6 +17,7 @@ class PhysicsScene: UIViewController, ViewProtocol, Updateable {
     var spaceShip: ObjConformation = .init(radius: .zero, position: .zero, mass: .zero, isDynamic: true)
     var isEditingMode: Bool = true
     var isCreatingPaht: Bool = false
+    var followShip: Bool = true
     
   
     
@@ -88,9 +89,10 @@ class PhysicsScene: UIViewController, ViewProtocol, Updateable {
         
 //        self.view.layer.position = spaceship?.position.transformToCGPoint() ?? .zero
         
-        self.view.layer.position.x = (CGFloat(spaceShip.position.x) * -1) + 2200.0
-        self.view.layer.position.y = (CGFloat(spaceShip.position.y ) * -1) + 2600.0
-        
+        if followShip{
+            self.view.layer.position.x = (CGFloat(spaceShip.position.x) * -1) + 2200.0
+            self.view.layer.position.y = (CGFloat(spaceShip.position.y ) * -1) + 2600.0
+        }
         
     }
 }

@@ -7,6 +7,7 @@
 
 import UIKit
 import simd
+import SwiftUI
 
 protocol ViewProtocol: UIViewController {
     var objects: [ObjConformation] { get set }
@@ -16,7 +17,7 @@ protocol ViewProtocol: UIViewController {
 extension ViewProtocol {
     func addObject<T: ObjConformation>(type: T.Type ,position: simd_float2, radius: Float, mass: Float, isDynamic: Bool = true, in view: UIViewController & ViewProtocol) {
         
-        let obj = T(radius: radius, position: position, mass: mass, isDynamic: isDynamic)
+        let obj = T(radius: radius, position: position, mass: mass, isDynamic: isDynamic, forceApplyedByEnviroment: .zero)
         obj.layer.zPosition = -1
         view.view.addSubview(obj)
         view.objects.append(obj)
@@ -42,7 +43,6 @@ extension ViewProtocol {
         }
         
         updateSpaceship(deltaTime: deltaTime, isCreatingPaht: isCreatingPaht)
-       
     }
     
     func updateSpaceship(deltaTime: TimeInterval, isCreatingPaht: Bool){
@@ -76,4 +76,8 @@ extension ViewProtocol {
         view.layer.position.x += newDirection.x
         view.layer.position.y += newDirection.y
     }
+}
+
+#Preview {
+    ContentView()
 }

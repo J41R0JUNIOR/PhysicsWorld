@@ -34,12 +34,14 @@ extension GravityProtocol {
         for otherObject in objects {
             guard otherObject !== object else { continue }
             
-            let d: simd_float2 = otherObject.position - object.position
+            var d: simd_float2 = otherObject.position - object.position
             
             var distance = sqrt(pow(d.x, 2) + pow(d.y, 2))
             
-            if distance <= otherObject.radius || distance <= object.radius {
-                distance = object.radius + otherObject.radius
+            if distance <= object.radius + object.radius * 0.3 {
+                d = object.position - otherObject.position
+                
+                distance = sqrt(pow(d.x, 2) + pow(d.y, 2))
             }
             
             guard distance > 0 else { continue }

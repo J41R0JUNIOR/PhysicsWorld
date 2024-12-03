@@ -64,14 +64,11 @@ class PhysicsScene: UIViewController, ViewProtocol, Updateable {
         
         if let touch = touches.first {
             let position = touch.location(in: view)
-            let mass = Float.random(in: 10_000...50_000)
-            let radius = mass / 5000
+            let mass = Float.random(in: 50_000...100_000)
+            let radius = mass / 10000
            
             
             self.addObject(type: CircleView.self, position: .init(x: Float(position.x), y: Float(position.y)), radius: radius, mass: mass, in: self)
-            
-            print(position, "touched")
-            print(view.layer.position, "view")
 
     
             

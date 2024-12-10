@@ -17,7 +17,9 @@ protocol ViewProtocol: UIViewController {
 extension ViewProtocol {
     func addObject<T: ObjConformation>(type: T.Type ,position: simd_float2, radius: Float, mass: Float, isDynamic: Bool = true, in view: UIViewController & ViewProtocol) {
         
-        let obj = T(radius: radius, position: position, mass: mass, isDynamic: isDynamic, forceApplyedByEnviroment: .zero)
+        let randomDirectionforce: simd_float2 = .init(Float.random(in: -0.01...0.01), Float.random(in: -0.01...0.01))
+        
+        let obj = T(radius: radius, position: position, mass: mass, isDynamic: isDynamic, forceApplyedByEnviroment: randomDirectionforce)
         obj.layer.zPosition = -1
         view.view.addSubview(obj)
         view.objects.append(obj)
@@ -53,8 +55,6 @@ extension ViewProtocol {
             spaceShip.createPath(for: spaceShip)
         }
     }
-    
-  
     
 //    func isObjectInView(_ object: ObjConformation) -> Bool {
 //        return CGFloat(object.position.x) > view.bounds.maxX + view.layer.position.x || CGFloat(object.position.x) < view.bounds.minX - view.layer.position.x || CGFloat(object.position.y) > view.bounds.maxY || CGFloat(object.position.y) < view.bounds.minY ? true : false

@@ -27,6 +27,7 @@ extension GravityProtocol {
     }
     
     func applyEnviromentGravity(for objects: inout [ObjConformation], in object:  inout ObjConformation, deltaTime: TimeInterval) {
+//        let G: Float = 6.674e-11
         let G: Float = 6.674e-11
         
         object.forceApplyedByEnviroment = simd_float2.zero

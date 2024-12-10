@@ -48,8 +48,8 @@ class PhysicsScene: UIViewController, ViewProtocol, Updateable {
         
 //        self.addObject(type: SpaceShipView.self, position: .init(x: Float(1984), y: Float(1937)), radius: 50, mass: 50000, in: self)
         
-        let posX: CGFloat = 1984
-        let posY: CGFloat = 1937
+//        let posX: CGFloat = 1984
+//        let posY: CGFloat = 1937
         
 //        self.view.anchorPoint = .init(x: posX, y: posY)
         
@@ -68,12 +68,7 @@ class PhysicsScene: UIViewController, ViewProtocol, Updateable {
             let mass = Float.random(in: 50_000...100_000)
             let radius = mass / 10000
            
-            
             self.addObject(type: CircleView.self, position: .init(x: Float(position.x), y: Float(position.y)), radius: radius, mass: mass, in: self)
-
-    
-            
-//            self.addObject(type: SpaceShipView.self, position: .init(x: .init(position.x), y: .init(position.y)), radius: 50, mass: 50000, in: self)
         }
     }
     
@@ -81,11 +76,8 @@ class PhysicsScene: UIViewController, ViewProtocol, Updateable {
         self.controlCamera(deltaTime, touches: touches)
     }
     
-  
-    
     func update(_ currentTime: TimeInterval){
         updateObjects(currentTime, isCreatingPaht: isCreatingPaht)
-        
         
 //        self.view.layer.position = spaceship?.position.transformToCGPoint() ?? .zero
         

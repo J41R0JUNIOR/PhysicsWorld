@@ -42,8 +42,8 @@ class PhysicsScene: UIViewController, ViewProtocol, Updateable {
 //            let mass = Float.random(in: 50_000...100_000)
 //            let radius = mass / 10000
             let radius = Float.random(in: 1...30)
-            let volume = pow(radius, 5) * 3.14 * (4/3)
-            let mass = volume * pow(10,7)
+            let volume = pow(radius, 3) * 3.14 * (4/3)
+            let mass = volume * pow(10,8)
            
             self.addObject(type: CircleView.self, position: .init(x: Float(position.x), y: Float(position.y)), radius: radius, mass: mass, in: self)
         }

@@ -20,6 +20,7 @@ extension ViewProtocol {
 //        let randomDirectionforce: simd_float2 = .init(Float.random(in: -0.01...0.01), Float.random(in: -0.01...0.01))
         
 //        let obj = T(radius: radius, position: position, mass: mass, isDynamic: isDynamic, forceApplyedByEnviroment: randomDirectionforce)
+        
         let obj =  T(radius: radius, position: position, mass: mass, isDynamic: isDynamic, forceApplyedByEnviroment: .zero)
         obj.layer.zPosition = -1
         view.view.addSubview(obj)

@@ -11,7 +11,7 @@ import SwiftUI
 
 protocol ViewProtocol: UIViewController {
     var objects: [ObjConformation] { get set }
-    var spaceShip: ObjConformation { get set }
+   
 }
 
 extension ViewProtocol {
@@ -25,14 +25,6 @@ extension ViewProtocol {
         view.objects.append(obj)
     }
     
-    func addSpaceShip<T: ObjConformation>(type: T.Type ,position: simd_float2, radius: Float, mass: Float, isDynamic: Bool = true, in view: UIViewController & ViewProtocol) {
-        
-        let obj = T(radius: radius, position: position, mass: mass, isDynamic: isDynamic)
-        obj.layer.zPosition = -1
-        view.view.addSubview(obj)
-        view.spaceShip = obj
-    }
-    
     func updateObjects(_ deltaTime: TimeInterval, isCreatingPaht: Bool){
         for var n: ObjConformation in objects {
 
@@ -44,16 +36,6 @@ extension ViewProtocol {
             }
         }
         
-        updateSpaceship(deltaTime: deltaTime, isCreatingPaht: isCreatingPaht)
-    }
-    
-    func updateSpaceship(deltaTime: TimeInterval, isCreatingPaht: Bool){
-        spaceShip.update(deltatime: deltaTime)
-        spaceShip.applyEnviromentGravity(for: &objects, in: &spaceShip, deltaTime: deltaTime)
-        
-        if isCreatingPaht {
-            spaceShip.createPath(for: spaceShip)
-        }
     }
     
 //    func isObjectInView(_ object: ObjConformation) -> Bool {

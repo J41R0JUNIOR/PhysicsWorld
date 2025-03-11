@@ -24,16 +24,9 @@ class HUDPhysicsScene: UIViewController, Updateable {
     var editModeToggle = CustomButton(text: "Edit", target: HUDPhysicsScene.self, action: #selector (editMode), event: .touchDown)
     
     var pathCreationToggle = CustomButton(text: "Show Path", target: HUDPhysicsScene.self, action: #selector (createPath), event: .touchDown)
+  
     
-    var moveUpButton = CustomButton(text: "Up", target: HUDPhysicsScene.self, action: #selector (up), event: .touchDown)
-    
-    var moveDownButton =  CustomButton(text: "Down", target: HUDPhysicsScene.self, action: #selector (down), event: .touchDown)
-    
-    var moveLeftButton: UIButton = .init()
-    
-    var moveRightButton: UIButton = .init()
-    
-    var followShipButton = CustomButton(text: "Disable Follow", target: HUDPhysicsScene.self, action: #selector (followShipToggle), event: .touchDown)
+
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -59,21 +52,7 @@ class HUDPhysicsScene: UIViewController, Updateable {
         physicsScene.view.layer.sublayers?.removeAll(where: { $0 is CAShapeLayer })
     }
     
-    @objc func up() {
-        physicsScene.spaceShip.forceApplyedByEnviroment = .init(0, -0.01)
-    }
-    
-    @objc func down() {
-        physicsScene.spaceShip.forceApplyedByEnviroment = .init(0, 0.01)
-    }
-    
-    @objc func resetUpAndDown(){
-        physicsScene.spaceShip.forceApplyedByEnviroment = .zero
-    }
-    
-    @objc func followShipToggle(){
-        physicsScene.followShip.toggle()
-    }
+   
     
     func update(_ deltaTime: TimeInterval) {
         
@@ -85,8 +64,7 @@ class HUDPhysicsScene: UIViewController, Updateable {
         
         self.pathCreationToggle.text = !physicsScene.isCreatingPaht ? "Disable Path" : "Show Path"
         
-        self.followShipButton.text = !physicsScene.followShip ? "Disable Follow" : "Follow Ship"
-        
+    
       
     }
 }

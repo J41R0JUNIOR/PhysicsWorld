@@ -14,19 +14,13 @@ class PhysicsScene: UIViewController, ViewProtocol, Updateable {
     var timerToUpdate: Timer?
     
     var objects: [ObjConformation] = []
-    var spaceShip: ObjConformation = .init(radius: .zero, position: .zero, mass: .zero, isDynamic: true)
     var isEditingMode: Bool = true
     var isCreatingPaht: Bool = false
-    var followShip: Bool = true
-    
-  
+   
     
     init() {
-     
-        
         super.init(nibName: nil, bundle: nil)
         
-        self.addSpaceShip(type: SpaceShipView.self, position: .init(x: Float(1984), y: Float(1937)), radius: 50, mass: 50000, in: self)
         
     }
     
@@ -80,11 +74,6 @@ class PhysicsScene: UIViewController, ViewProtocol, Updateable {
         updateObjects(currentTime, isCreatingPaht: isCreatingPaht)
         
 //        self.view.layer.position = spaceship?.position.transformToCGPoint() ?? .zero
-        
-        if followShip{
-            self.view.layer.position.x = (CGFloat(spaceShip.position.x) * -1) + 2200.0
-            self.view.layer.position.y = (CGFloat(spaceShip.position.y ) * -1) + 2600.0
-        }
         
     }
 }

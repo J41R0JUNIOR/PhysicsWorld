@@ -7,15 +7,19 @@
 
 import UIKit
 import simd
+import SwiftUI
 
 protocol ViewProtocol: UIViewController {
     var objects: [ObjConformation] { get set }
+   
 }
 
 extension ViewProtocol {
     func addObject<T: ObjConformation>(type: T.Type ,position: simd_float2, radius: Float, mass: Float, isDynamic: Bool = true, in view: UIViewController & ViewProtocol) {
         
-        let obj = T(radius: radius, position: position, mass: mass, isDynamic: isDynamic)
+        let randomDirectionforce: simd_float2 = .init(Float.random(in: -0.01...0.01), Float.random(in: -0.01...0.01))
+        
+        let obj = T(radius: radius, position: position, mass: mass, isDynamic: isDynamic, forceApplyedByEnviroment: randomDirectionforce)
         obj.layer.zPosition = -1
         view.view.addSubview(obj)
         view.objects.append(obj)
@@ -23,15 +27,7 @@ extension ViewProtocol {
     
     func updateObjects(_ deltaTime: TimeInterval, isCreatingPaht: Bool){
         for var n: ObjConformation in objects {
-            
-//            if isObjectInView(n) {
-//                
-//                n.removeFromSuperview()
-//                objects.removeAll(where: { $0 === n })
-//                
-//                return
-//            }
-            
+
             n.update(deltatime: deltaTime)
             n.applyEnviromentGravity(for: &objects, in: &n, deltaTime: deltaTime)
             
@@ -39,9 +35,8 @@ extension ViewProtocol {
                 n.createPath(for: n)
             }
         }
+        
     }
-    
-  
     
 //    func isObjectInView(_ object: ObjConformation) -> Bool {
 //        return CGFloat(object.position.x) > view.bounds.maxX + view.layer.position.x || CGFloat(object.position.x) < view.bounds.minX - view.layer.position.x || CGFloat(object.position.y) > view.bounds.maxY || CGFloat(object.position.y) < view.bounds.minY ? true : false
@@ -56,11 +51,15 @@ extension ViewProtocol {
         let dy = Float(position.y - previusLocation.y)
         
         var direction = simd_float2(x: dx , y: dy )
-        direction *= 0.5
+        direction *= 2
         
         let newDirection = direction.transformToCGPoint()
         
         view.layer.position.x += newDirection.x
         view.layer.position.y += newDirection.y
     }
+}
+
+#Preview {
+    ContentView()
 }

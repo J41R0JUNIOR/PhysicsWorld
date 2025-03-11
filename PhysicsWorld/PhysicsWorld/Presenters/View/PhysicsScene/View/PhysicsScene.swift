@@ -31,27 +31,7 @@ class PhysicsScene: UIViewController, ViewProtocol, Updateable {
     override func viewDidLoad() {
         super.viewDidLoad()        
         startUpdateLoop(deltaTime: deltaTime)
-        
-     
-//
-//        self.view.anchorPoint = .init((x: self.view.layer.position.x, y: self.view.layer.position.y))
-        
-//        self.view.anchorPoint = self.view.layer.position
-       
-        
-        
-//        self.addObject(type: SpaceShipView.self, position: .init(x: Float(1984), y: Float(1937)), radius: 50, mass: 50000, in: self)
-        
-//        let posX: CGFloat = 1984
-//        let posY: CGFloat = 1937
-        
-//        self.view.anchorPoint = .init(x: posX, y: posY)
-        
-//        self.addObject(type: SpaceShipView.self, position: .init(x: Float(posX), y: Float(posY)), radius: 50, mass: 50000, in: self)
-        
-//        self.view.layer.position = .init(x: posX, y: posY)
-        
-        
+    
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
@@ -59,8 +39,11 @@ class PhysicsScene: UIViewController, ViewProtocol, Updateable {
         
         if let touch = touches.first {
             let position = touch.location(in: view)
-            let mass = Float.random(in: 50_000...100_000)
-            let radius = mass / 10000
+//            let mass = Float.random(in: 50_000...100_000)
+//            let radius = mass / 10000
+            let radius = Float.random(in: 1...30)
+            let volume = pow(radius, 5) * 3.14 * (4/3)
+            let mass = volume * pow(10,7)
            
             self.addObject(type: CircleView.self, position: .init(x: Float(position.x), y: Float(position.y)), radius: radius, mass: mass, in: self)
         }

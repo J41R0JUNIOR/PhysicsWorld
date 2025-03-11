@@ -25,9 +25,6 @@ class HUDPhysicsScene: UIViewController, Updateable {
     
     var pathCreationToggle = CustomButton(text: "Show Path", target: HUDPhysicsScene.self, action: #selector (createPath), event: .touchDown)
   
-    
-
-
     override func viewDidLoad() {
         super.viewDidLoad()
         setupViewCode()
@@ -52,20 +49,14 @@ class HUDPhysicsScene: UIViewController, Updateable {
         physicsScene.view.layer.sublayers?.removeAll(where: { $0 is CAShapeLayer })
     }
     
-   
-    
     func update(_ deltaTime: TimeInterval) {
         
         self.qtdNodes = physicsScene.view.subviews.count
         qtdNodesLabel.text = "qtd nodes: \(qtdNodes)"
         
-
         self.editModeToggle.text = physicsScene.isEditingMode ? "Disable Edit" : "Edit"
         
         self.pathCreationToggle.text = !physicsScene.isCreatingPaht ? "Disable Path" : "Show Path"
-        
-    
-      
     }
 }
 

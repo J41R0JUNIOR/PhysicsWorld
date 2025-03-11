@@ -18,34 +18,38 @@ extension PathProtocol {
     func createPath(for object: ObjConformation) {
         object.path.removeAllPoints()
         
-        let steps = 10
-        let timeStep: TimeInterval = 0.1
+        let steps = 50
+        let timeStep: TimeInterval = 0.1 
         var simulatedPosition = object.position
         var simulatedDirection = object.direction
-        
-        object.path.move(to: CGPoint(x: CGFloat(simulatedPosition.x), y: CGFloat(simulatedPosition.y)))
-        
+
+        object.path.move(to: simulatedPosition.transformToCGPoint())
+
         for _ in 1...steps {
-            let deltaTimeGravity = object.mass * Float(timeStep)
-            simulatedDirection += object.forceApplyedByEnviroment * Float(timeStep)
-            simulatedPosition += simulatedDirection * Float(deltaTimeGravity)
+            let acceleration = object.forceApplyedByEnviroment / object.mass
+            simulatedDirection += acceleration * Float(timeStep)
+            simulatedPosition += simulatedDirection * Float(timeStep)
             
             object.path.addLine(to: simulatedPosition.transformToCGPoint())
         }
-        
+
         let shapeLayer = CAShapeLayer()
         shapeLayer.path = object.path.cgPath
         shapeLayer.strokeColor = UIColor.red.cgColor
         shapeLayer.lineWidth = 2.0
         shapeLayer.fillColor = nil
         shapeLayer.name = "\(object.id)"
-        
-        if let node = self.superview?.layer.sublayers?.first(where: { $0.name == "\(object.id)" }){
-            node.removeFromSuperlayer()
+
+        DispatchQueue.main.async {
+            self.superview?.layer.sublayers?
+                .filter { $0.name == "\(object.id)" }
+                .forEach { $0.removeFromSuperlayer() }
+            
+            self.superview?.layer.addSublayer(shapeLayer)
         }
-        self.superview?.layer.addSublayer(shapeLayer)
     }
 }
+
 
 
 #Preview {

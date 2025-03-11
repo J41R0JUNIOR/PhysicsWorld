@@ -72,9 +72,7 @@ class PhysicsScene: UIViewController, ViewProtocol, Updateable {
     
     func update(_ currentTime: TimeInterval){
         updateObjects(currentTime, isCreatingPaht: isCreatingPaht)
-        
-//        self.view.layer.position = spaceship?.position.transformToCGPoint() ?? .zero
-        
+
     }
 }
 

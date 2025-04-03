@@ -24,11 +24,35 @@ class HUDPhysicsScene: UIViewController, Updateable {
     var editModeToggle = CustomButton(text: "Edit", target: HUDPhysicsScene.self, action: #selector (editMode), event: .touchDown)
     
     var pathCreationToggle = CustomButton(text: "Show Path", target: HUDPhysicsScene.self, action: #selector (createPath), event: .touchDown)
-  
+    
+    var massSlider: UISlider = {
+        let slider = UISlider()
+        slider.minimumValue = 1
+        slider.maximumValue = 1000
+        slider.value = 10
+        slider.tintColor = .systemBlue
+
+        return slider
+    }()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+
+//        massSlider.addTarget(self, action: #selector(massSliderChanged), for: .valueChanged)
+        
         setupViewCode()
         startUpdateLoop(deltaTime: deltaTime)
+    }
+    
+    @objc func massSliderChanged(_ sender: UISlider) {
+        let newMass = sender.value
+        printContent(newMass)
+       
+        updateMass()
+    }
+    
+    func updateMass() {
+        
     }
     
     @objc func reset() {

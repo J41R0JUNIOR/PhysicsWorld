@@ -16,13 +16,14 @@ extension HUDPhysicsScene: ViewCode {
             editModeToggle.trailingAnchor.constraint(equalTo: view.trailingAnchor),
             editModeToggle.topAnchor.constraint(equalTo: view.topAnchor),
             
-      
-            
             resetButton.trailingAnchor.constraint(equalTo: view.trailingAnchor),
             resetButton.topAnchor.constraint(equalTo: editModeToggle.bottomAnchor, constant: 10),
             
             pathCreationToggle.trailingAnchor.constraint(equalTo: view.trailingAnchor),
             pathCreationToggle.topAnchor.constraint(equalTo: resetButton.bottomAnchor, constant: 10),
+            
+            massSlider.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -(massSlider.frame.width)),
+            massSlider.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -(massSlider.frame.height)),
             
         ])
     }
@@ -32,7 +33,9 @@ extension HUDPhysicsScene: ViewCode {
         view.addSubview(qtdNodesLabel)
         view.addSubview(resetButton)
         view.addSubview(editModeToggle)
+        view.addSubview(massSlider)
         view.addSubview(pathCreationToggle)
+       
 
     }
     
@@ -45,6 +48,7 @@ extension HUDPhysicsScene: ViewCode {
         resetButton.translatesAutoresizingMaskIntoConstraints = false
         editModeToggle.translatesAutoresizingMaskIntoConstraints = false
         pathCreationToggle.translatesAutoresizingMaskIntoConstraints = false
+//        massSlider.translatesAutoresizingMaskIntoConstraints = false
       
         physicsScene.view.layer.zPosition = -1
         physicsScene.view.frame = view.bounds
@@ -53,6 +57,7 @@ extension HUDPhysicsScene: ViewCode {
         physicsScene.view.layer.borderWidth = 10
         physicsScene.view.layer.borderColor = UIColor.blue.cgColor
         physicsScene.view.layer.bounds.size = .init(width: 4000, height: 4000)
+
     }
 }
 
